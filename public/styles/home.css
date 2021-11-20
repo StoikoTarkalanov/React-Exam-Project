@@ -1,0 +1,130 @@
+/* NAVIGATION CSS    */
+
+.nav-logo a {
+  text-decoration: none;
+  color: gray;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 80px;
+  box-shadow: 1px 1px 9px -5px black;
+  background: white;
+  color: gray;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu li {
+  list-style: none;
+  margin: 0 7px;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  font-weight: bold;
+  color: gray;
+}
+
+.header-landing {
+  padding: 30px 80px;
+  align-items: center;
+  background-image: url('../images/banner.jpg');
+  background-repeat: no-repeat;
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background-size: 100% 100%;
+}
+
+.header-landing-content {
+  margin: 160px;
+  text-align: center;
+  color: white;
+}
+
+.header-landing-content-title {
+  font-size: 60px;
+}
+
+.header-landing-content-text {
+  font-size: 20px;
+}
+
+.header-landing-content-subtitle {
+  font-size: 12px;
+  font-style: italic;
+  margin: 5px 0;
+}
+
+.header-landing-button button {
+  font-size: 15px;
+  font-weight: bolder;
+  padding: 12px 30px;
+  cursor: pointer;
+}
+
+.header-landing-button {
+  padding: 30px;
+}
+
+/* Landing Hero SECTION CSS */
+
+.landing-hero-content {
+  text-align: center;
+  padding: 50px;
+}
+
+.landing-hero-content-title {
+  font-size: 45px;
+}
+
+.landing-hero-images {
+  display: flex;
+  justify-content: center;
+}
+
+.landing-hero-images-row {
+  padding: 30px;
+  text-align: center;
+}
+
+.landing-hero-images-row img {
+  width: 380px;
+  height: 200px;
+  box-shadow: 1px 1px 9px -5px black;
+}
+
+/* FOOTER */
+
+.footer {
+  margin-top: 43px;
+  padding: 20px 0px;
+  background-color: #23262d;
+  color: white;
+}
+
+.footer-information {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-information-text {
+  padding-right: 6px;
+}
+
+.footer-information-link a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-information-link a:hover {
+    color: gray;
+}
