@@ -1,9 +1,9 @@
 const Register = () => {
   return (
     <>
-      <article className="form">
-        <h1 className="form-title">Register</h1>
-        <form className="form-content">
+      <article className="form-validate">
+        <h1 className="form-validate-title">Register</h1>
+        <form className="form-validate-content">
           <input type="email" name="email" placeholder="Email" />
           <input type="password" name="password" placeholder="Password" />
           <input type="password" name="repeatPassword" placeholder="Repeat Password" />

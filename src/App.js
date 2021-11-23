@@ -8,7 +8,10 @@ import Login from './components/Login';
 import Footer from './components/Footer';
 import Register from './components/Register';
 import Catalog from './components/Catalog';
+import UserCatalog from './components/UserCatalog';
 import Logout from './components/Logout';
+import Create from './components/Create';
+import Edit from './components/Edit';
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -47,6 +50,9 @@ function App() {
         <Routes>
           <Route path='/home' element={<Home />} />
           <Route path='/all-cars' element={<Catalog />} />
+          <Route path='/user-cars' element={<UserCatalog />} />
+          <Route path='/create' element={<Create />} />
+          <Route path='/Edit' element={<Edit />} />
           <Route path='/login' element={<Login onLogin={onLogin} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/logout' element={<Logout onLogout={onLogout} />} />

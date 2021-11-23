@@ -1,0 +1,34 @@
+.form-car h1 {
+  margin-bottom: 45px;
+}
+
+.form-car {
+  margin: 61px 300px;
+  padding: 50px;
+  box-shadow: 1px 1px 9px -5px black;
+  text-align: center;
+}
+
+.form-car-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-car-content input {
+  width: 66%;
+  height: 38px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+}
+
+.form-car-content input[type='submit'] {
+  background: white;
+  width: 20%;
+  margin-top: 33px;
+  font-size: 15px;
+}
+
+.form-car-content textarea {
+  resize: none;
+}

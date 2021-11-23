@@ -20,9 +20,9 @@ const Login = ({ onLogin }) => {
 
   return (
     <>
-      <article className="form">
-        <h1 className="form-title">Login</h1>
-        <form className="form-content" onSubmit={onLoginHandler}>
+      <article className="form-validate">
+        <h1 className="form-validate-title">Login</h1>
+        <form className="form-validate-content" onSubmit={onLoginHandler}>
           <input type="email" name="email" placeholder="Email" />
           <input type="password" name="password" placeholder="Password" />
           <input type="submit" value="Login" />
