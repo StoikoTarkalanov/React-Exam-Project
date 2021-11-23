@@ -6,6 +6,9 @@ import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Login from './components/Login';
 import Footer from './components/Footer';
+import Register from './components/Register';
+import Catalog from './components/Catalog';
+import Logout from './components/Logout';
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -22,19 +25,19 @@ function App() {
     });
   }, []);
 
-  // const onLogin = (username) => {
-  //   setUserInfo({
-  //     isAuthenticated: true,
-  //     user: username,
-  //   });
-  // };
+  const onLogin = (username) => {
+    setUserInfo({
+      isAuthenticated: true,
+      user: username,
+    });
+  };
 
-  // const onLogout = () => {
-  //   setUserInfo({
-  //     isAuthenticated: false,
-  //     user: null,
-  //   });
-  // };
+  const onLogout = () => {
+    setUserInfo({
+      isAuthenticated: false,
+      user: null,
+    });
+  };
 
   return (
     <div id='container'>
@@ -42,8 +45,11 @@ function App() {
 
       <main id='site-content'>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/all-cars' element={<Catalog />} />
+          <Route path='/login' element={<Login onLogin={onLogin} />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/logout' element={<Logout onLogout={onLogout} />} />
         </Routes>
       </main>
 

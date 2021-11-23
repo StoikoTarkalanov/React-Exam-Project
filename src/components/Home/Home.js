@@ -1,4 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
+import Mercedes from '../images/Mercedes 190 SL.jpg';
+import Jaguar from '../images/Jaguar E-Type.jpg';
+import Chevrolet from '../images/Chevrolet Corvette.jpg';
 
 const Home = () => {
   return (
@@ -33,15 +36,15 @@ const Home = () => {
             
             {/* This images are from posted cars so should come from database */}
 
-            <img src='./Mercedes 190 SL.jpg' alt='Image...' />
+            <img src={Mercedes} alt='Image...' />
             <h3 className='landing-hero-images-row-title'>Mercedes SL</h3>
           </article>
           <article className='landing-hero-images-row'>
-            <img src='/Jaguar E-Type.jpg' alt='Image...' />
+            <img src={Jaguar} alt='Image...' />
             <h3 className='landing-hero-images-row-title'>Jaguar E-Type</h3>
           </article>
           <article className='landing-hero-images-row'>
-            <img src='/Chevrolet Corvette.jpg' alt='Image...' />
+            <img src={Chevrolet} alt='Image...' />
             <h3 className='landing-hero-images-row-title'>Chevrolet Corvette</h3>
           </article>
         </article>

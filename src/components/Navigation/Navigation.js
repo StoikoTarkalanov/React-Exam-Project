@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-const Navigation = ({ isAuthenticated, user }) => {
+const Navigation = ({ isAuthenticated }) => {
   let guestNavigation = (
     <ul className='nav-menu'>
       <li>
-        <Link to='/'>Home</Link>
+        <Link to='/home'>Home</Link>
       </li>
       <li>
         <Link to='/all-cars'>All Cars</Link>
@@ -21,19 +21,19 @@ const Navigation = ({ isAuthenticated, user }) => {
   let userNavigation = (
     <ul className='nav-menu'>
       <li>
-        <Link to='/'>Home</Link>
+        <Link to='/home'>Home</Link>
       </li>
       <li>
         <Link to='/all-cars'>All Cars</Link>
       </li>
       <li>
-        <Link to='/gallery'>My Cars</Link>
+        <Link to='/user-cars'>My Cars</Link>
       </li>
       <li>
-        <Link to='/gallery'>Create Article</Link>
+        <Link to='/create'>Create Article</Link>
       </li>
       <li>
-        <Link to='/gallery'>Logout</Link>
+        <Link to='/logout'>Logout</Link>
       </li>
     </ul>
   );

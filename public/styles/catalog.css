@@ -1,0 +1,36 @@
+.cars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cars-card {
+  text-align: center;
+  margin: 100px;
+}
+
+.cars-card-title {
+  padding-bottom: 18px;
+}
+
+.cars-card-image {
+  margin: auto;
+  width: 400px;
+  height: 210px;
+  box-shadow: -4px -5px 11px -5px black;
+}
+
+.cars-card-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.cars-card-button {
+  padding: 8px 40px;
+  margin-top: 25px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: -3px -3px 11px -5px black;
+  background: #e8f0f3;
+  cursor: pointer;
+}
