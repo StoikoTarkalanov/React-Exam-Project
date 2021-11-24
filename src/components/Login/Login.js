@@ -15,11 +15,10 @@ const Login = ({ onLogin }) => {
       
       onLogin(email);
 
-      navigate('/home');
+      navigate('/');
   }
 
   return (
-    <>
       <article className="form-validate">
         <h1 className="form-validate-title">Login</h1>
         <form className="form-validate-content" onSubmit={onLoginHandler}>
@@ -28,7 +27,6 @@ const Login = ({ onLogin }) => {
           <input type="submit" value="Login" />
         </form>
       </article>
-    </>
   );
 };
 

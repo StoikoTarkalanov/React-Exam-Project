@@ -12,6 +12,7 @@ import UserCatalog from './components/UserCatalog';
 import Logout from './components/Logout';
 import Create from './components/Create';
 import Edit from './components/Edit';
+import About from './components/About';
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -43,19 +44,20 @@ function App() {
   };
 
   return (
-    <div id='container'>
+    <div id="container">
       <Navigation {...userInfo} />
 
-      <main id='site-content'>
+      <main id="site-content">
         <Routes>
-          <Route path='/home' element={<Home />} />
-          <Route path='/all-cars' element={<Catalog />} />
-          <Route path='/user-cars' element={<UserCatalog />} />
-          <Route path='/create' element={<Create />} />
-          <Route path='/Edit' element={<Edit />} />
-          <Route path='/login' element={<Login onLogin={onLogin} />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/logout' element={<Logout onLogout={onLogout} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/all-cars" element={<Catalog />} />
+          <Route path="/user-cars" element={<UserCatalog />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/Edit" element={<Edit />} />
+          <Route path="/login" element={<Login onLogin={onLogin} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout onLogout={onLogout} />} />
         </Routes>
       </main>
 

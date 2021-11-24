@@ -1,6 +1,5 @@
 const Register = () => {
   return (
-    <>
       <article className="form-validate">
         <h1 className="form-validate-title">Register</h1>
         <form className="form-validate-content">
@@ -10,7 +9,6 @@ const Register = () => {
           <input type="submit" value="Register" />
         </form>
       </article>
-    </>
   );
 };
 

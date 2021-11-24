@@ -1,6 +1,5 @@
 const Create = () => {
   return (
-    <>
       <article className="form-car">
         <h1 className="form-car-title">Create</h1>
         <form className="form-car-content">
@@ -10,7 +9,6 @@ const Create = () => {
           <input type="submit" value="Create" />
         </form>
       </article>
-    </>
   );
 };
 

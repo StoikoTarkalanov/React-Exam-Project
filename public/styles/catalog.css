@@ -4,6 +4,11 @@
   justify-content: center;
 }
 
+.catalog-title {
+  text-align: center;
+  padding-top: 45px;
+}
+
 .cars-card {
   text-align: center;
   margin: 100px;
@@ -15,8 +20,8 @@
 
 .cars-card-image {
   margin: auto;
-  width: 400px;
-  height: 210px;
+  width: 480px;
+  height: 260px;
   box-shadow: -4px -5px 11px -5px black;
 }
 
