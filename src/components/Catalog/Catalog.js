@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import BMW from '../images/BMW E30.png';
 import Mercedes from '../images/Mercedes 190 SL.jpg';
+import { Link } from 'react-router-dom';
 
 const Catalog = () => {
   return (
@@ -13,7 +14,11 @@ const Catalog = () => {
           <article className="cars-card-image">
             <img src={Mercedes} alt="Image..." />
           </article>
-          <button className="cars-card-button">See Details</button>
+          <button className="cars-card-button">
+            <Link className="cars-card-button-link" to="/details">
+              See Details
+            </Link>
+          </button>
         </article>
 
         <article className="cars-card">
@@ -21,7 +26,11 @@ const Catalog = () => {
           <article className="cars-card-image">
             <img src={BMW} alt="Image..." />
           </article>
-          <button className="cars-card-button">See Details</button>
+          <button className="cars-card-button">
+            <Link className="cars-card-button-link" to="/details">
+              See Details
+            </Link>
+          </button>
         </article>
 
         <article className="cars-card">
@@ -29,7 +38,11 @@ const Catalog = () => {
           <article className="cars-card-image">
             <img src={BMW} alt="Image..." />
           </article>
-          <button className="cars-card-button">See Details</button>
+          <button className="cars-card-button">
+            <Link className="cars-card-button-link" to="/details">
+              See Details
+            </Link>
+          </button>
         </article>
 
         <article className="cars-card">
@@ -37,7 +50,11 @@ const Catalog = () => {
           <article className="cars-card-image">
             <img src={BMW} alt="Image..." />
           </article>
-          <button className="cars-card-button">See Details</button>
+          <button className="cars-card-button">
+            <Link className="cars-card-button-link" to="/details">
+              See Details
+            </Link>
+          </button>
         </article>
       </section>
     </>

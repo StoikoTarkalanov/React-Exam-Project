@@ -13,6 +13,7 @@ import Logout from './components/Logout';
 import Create from './components/Create';
 import Edit from './components/Edit';
 import About from './components/About';
+import Details from './components/Details';
 
 function App() {
   const [userInfo, setUserInfo] = useState({
@@ -54,6 +55,7 @@ function App() {
           <Route path="/user-cars" element={<UserCatalog />} />
           <Route path="/about" element={<About />} />
           <Route path="/create" element={<Create />} />
+          <Route path="/details" element={<Details />} />
           <Route path="/Edit" element={<Edit />} />
           <Route path="/login" element={<Login onLogin={onLogin} />} />
           <Route path="/register" element={<Register />} />

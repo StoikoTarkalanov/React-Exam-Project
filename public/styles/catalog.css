@@ -39,3 +39,13 @@
   background: #e8f0f3;
   cursor: pointer;
 }
+
+.cars-card-button-link {
+  text-decoration: none;
+  color: black;
+}
+
+.cars-card-content {
+  margin: 60px 210px;
+  text-align: justify;
+}
