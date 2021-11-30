@@ -4,6 +4,7 @@ import Mercedes from '../images/Mercedes 190 SL.jpg';
 import { Link } from 'react-router-dom';
 
 const Catalog = () => {
+
   return (
     <>
       <h1 className="catalog-title">All Cars</h1>
