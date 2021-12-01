@@ -1,7 +1,10 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import * as authService from '../../services/authService';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onLoginHandler = async (e) => {
@@ -9,16 +12,24 @@ const Login = ({ onLogin }) => {
 
     let formData = new FormData(e.currentTarget);
 
-    let email = formData.get('email');
-    let username = formData.get('username');
+    let name = formData.get('username');
+    // let email = formData.get('email');
     let password = formData.get('password');
 
-    const authData = await authService.login(username, password);
-    console.log(authData);
+    try {
+      const authData = await authService.login(name, password);
+      const { objectId, username, sessionToken } = authData;
+      login({ objectId, username, sessionToken });
 
-    onLogin(email);
+      const { code, error } = authData;
+      if (code) {
+        throw error;
+      }
 
-    navigate('/');
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

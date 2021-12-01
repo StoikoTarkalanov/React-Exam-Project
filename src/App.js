@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import * as authService from './services/authService';
+import { AuthContext } from './contexts/AuthContext';
+
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -16,55 +17,41 @@ import About from './components/About';
 import Details from './components/Details';
 
 function App() {
-  const [userInfo, setUserInfo] = useState({
-    isAuthenticated: false,
+  const [user, setUser] = useState({
+    objectId: '',
     username: '',
+    sessionToken: '',
   });
 
-  useEffect(() => {
-    let user = authService.getUser();
-
-    setUserInfo({
-      isAuthenticated: Boolean(user),
-      user,
-    });
-  }, []);
-
-  const onLogin = (username) => {
-    setUserInfo({
-      isAuthenticated: true,
-      user: username,
-    });
+  const login = (authData) => {
+    setUser(authData);
   };
 
-  const onLogout = () => {
-    setUserInfo({
-      isAuthenticated: false,
-      user: null,
-    });
-  };
+  // const onLogout = () => {};
 
   return (
-    <div id="container">
-      <Navigation {...userInfo} />
+    <AuthContext.Provider value={{ user, login }}>
+      <div id="container">
+        <Navigation />
 
-      <main id="site-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/all-cars" element={<Catalog />} />
-          <Route path="/user-cars" element={<UserCatalog />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/details" element={<Details />} />
-          <Route path="/Edit" element={<Edit />} />
-          <Route path="/login" element={<Login onLogin={onLogin} />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/logout" element={<Logout onLogout={onLogout} />} />
-        </Routes>
-      </main>
+        <main id="site-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/all-cars" element={<Catalog />} />
+            <Route path="/user-cars" element={<UserCatalog />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/details/:carId" element={<Details />} />
+            <Route path="/Edit" element={<Edit />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
+          </Routes>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </AuthContext.Provider>
   );
 }
 

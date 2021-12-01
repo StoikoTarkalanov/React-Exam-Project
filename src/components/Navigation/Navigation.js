@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
-const Navigation = ({ isAuthenticated }) => {
+const Navigation = () => {
+  const { user } = useContext(AuthContext);
+
   let guestNavigation = (
     <ul className="nav-menu">
       <li>
@@ -47,7 +51,7 @@ const Navigation = ({ isAuthenticated }) => {
           </Link>
         </article>
 
-        {isAuthenticated ? userNavigation : guestNavigation}
+        {user.username ? userNavigation : guestNavigation}
         
       </nav>
     </header>
