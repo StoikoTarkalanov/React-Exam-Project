@@ -1,43 +1,38 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-import BMW from '../images/BMW E30.png';
-import Mercedes from '../images/Mercedes 190 SL.jpg';
-import { Link } from 'react-router-dom';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import * as carService from '../../services/carService';
+import CarCard from '../Catalog/Card/CarCard';
+import Loading from '../Loading';
 
 const UserCatalog = () => {
+  const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
+  const [cars, setCars] = useState([]);
+
+  useEffect(() => {
+
+    (async () => {
+      const userCatalogData = await carService.getUserCars(user);
+      setCars(userCatalogData.results);
+      setLoading(false);
+    })();
+
+  }, []);
+
   return (
     <>
+    {loading ? <Loading /> : '' }
       <h1 className="catalog-title">My Cars</h1>
-
       <section className="cars">
-        <article className="cars-card">
-          <h1 className="cars-card-title">User Car Heading</h1>
-          <article className="cars-card-image">
-            <img src={Mercedes} alt="Image..." />
-          </article>
-          <button className="cars-card-button">
-            <Link className="cars-card-button-link" to="/details">See Details</Link>
-          </button>
-        </article>
+        { cars.length > 0
+          ?
+            <>
+              {cars.map(x => <CarCard key={x.objectId} car={x} />)}
+            </>
+          : <p className="no-cars">Don't have cars yet!</p>
+        }
 
-        <article className="cars-card">
-          <h1 className="cars-card-title">User Car Heading 2</h1>
-          <article className="cars-card-image">
-            <img src={BMW} alt="Image..." />
-          </article>
-          <button className="cars-card-button">
-            <Link className="cars-card-button-link" to="/details">See Details</Link>
-          </button>
-        </article>
-
-        <article className="cars-card">
-          <h1 className="cars-card-title">User Car Heading 2</h1>
-          <article className="cars-card-image">
-            <img src={BMW} alt="Image..." />
-          </article>
-          <button className="cars-card-button">
-            <Link className="cars-card-button-link" to="/details">See Details</Link>
-          </button>
-        </article>
       </section>
     </>
   );

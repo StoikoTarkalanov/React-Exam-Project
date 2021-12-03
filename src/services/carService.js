@@ -8,6 +8,50 @@ const createPointer = (objectId) => {
   };
 };
 
+export const getAllCars = async () => {
+  const response = await fetch(`${serverURL}/classes/Cars`, {
+    method: 'GET',
+    headers: {
+      'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
+      'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+export const getUserCars = async ({sessionToken, objectId}) => {
+  const owner = createPointer(objectId);
+  const query = JSON.stringify({owner});
+  const response = await fetch(`${serverURL}/classes/Cars?where=${encodeURIComponent(query)}`, {
+    method: 'GET',
+    headers: {
+      'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
+      'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+export const getCarById = async (id) => {
+  const response = await fetch(`${serverURL}/classes/Cars/${id}`, {
+    method: 'GET',
+    headers: {
+      'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
+      'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const result = await response.json();
+  return result;
+};
+
 export const create = async (createData, sessionToken, objectId, username) => {
   const data = Object.assign({}, createData);
   data.owner = createPointer(objectId);
@@ -35,34 +79,6 @@ export const destroy = async (objectId, sessionToken) => {
       'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
       'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
       'X-Parse-Session-Token': sessionToken,
-    },
-  });
-
-  const result = await response.json();
-  return result;
-};
-
-export const getAllCars = async () => {
-  const response = await fetch(`${serverURL}/classes/Cars`, {
-    method: 'GET',
-    headers: {
-      'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
-      'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
-      'Content-Type': 'application/json',
-    },
-  });
-
-  const result = await response.json();
-  return result;
-};
-
-export const getCarById = async (id) => {
-  const response = await fetch(`${serverURL}/classes/Cars/${id}`, {
-    method: 'GET',
-    headers: {
-      'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
-      'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
-      'Content-Type': 'application/json',
     },
   });
 

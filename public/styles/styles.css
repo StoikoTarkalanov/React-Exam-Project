@@ -1,5 +1,6 @@
-@import 'home.css';
 @import 'all.css';
+@import 'home.css';
 @import 'validate-forms.css';
-@import 'catalog.css';
 @import 'car-forms.css';
+@import 'catalog.css';
+@import 'loader.css';

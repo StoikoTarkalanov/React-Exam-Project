@@ -47,12 +47,3 @@ export const logout = async (sessionToken) => {
   const result = await response.json();
   return result;
 };
-
-export const getUser = () => {
-  let username = localStorage.getItem('username');
-  return username;
-};
-
-export const isAuthenticated = () => {
-  return Boolean(getUser());
-};

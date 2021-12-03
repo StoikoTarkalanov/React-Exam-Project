@@ -1,9 +1,11 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 import * as carService from '../../services/carService';
+import Loading from '../Loading';
 
 const Create = () => {
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -16,6 +18,7 @@ const Create = () => {
     let imageUrl = formData.get('url');
     let content = formData.get('content');
 
+    setLoading(true);
     try {
       const createData = await carService.create(
         {
@@ -27,6 +30,7 @@ const Create = () => {
         user.objectId,
         user.username
       );
+      setLoading(false);
 
       const { code, error } = createData;
       if (code) {
@@ -40,6 +44,8 @@ const Create = () => {
   };
 
   return (
+    <>
+    {loading ? <Loading /> : '' }
     <article className="form-car">
       <h1 className="form-car-title">Create</h1>
       <form className="form-car-content" onSubmit={onCreate} method="POST">
@@ -55,6 +61,7 @@ const Create = () => {
         <input type="submit" value="Create" />
       </form>
     </article>
+    </>
   );
 };
 
