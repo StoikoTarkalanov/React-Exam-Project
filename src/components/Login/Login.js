@@ -13,18 +13,18 @@ const Login = () => {
     let formData = new FormData(e.currentTarget);
 
     let name = formData.get('username');
-    // let email = formData.get('email');
     let password = formData.get('password');
 
     try {
       const authData = await authService.login(name, password);
       const { objectId, username, sessionToken } = authData;
-      login({ objectId, username, sessionToken });
-
+      
       const { code, error } = authData;
       if (code) {
         throw error;
       }
+      
+      login({ objectId, username, sessionToken });
 
       navigate('/');
     } catch (error) {
@@ -35,9 +35,8 @@ const Login = () => {
   return (
     <article className="form-validate">
       <h1 className="form-validate-title">Login</h1>
-      <form className="form-validate-content" onSubmit={onLoginHandler}>
-        <input type="text" name="username" placeholder="Username" />
-        <input type="email" name="email" placeholder="Email" />
+      <form className="form-validate-content" method="POST" onSubmit={onLoginHandler}>
+        <input type="email" name="username" placeholder="Email" />
         <input type="password" name="password" placeholder="Password" />
         <input type="submit" value="Login" />
       </form>

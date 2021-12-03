@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AuthContext';
+import useLocalStorage from './hooks/useLocalStorage';
 
 import Navigation from './components/Navigation';
 import Home from './components/Home';
@@ -16,21 +16,25 @@ import Edit from './components/Edit';
 import About from './components/About';
 import Details from './components/Details';
 
+const initialAuthState = {
+  objectId: '',
+  username: '',
+  sessionToken: '',
+};
+
 function App() {
-  const [user, setUser] = useState({
-    objectId: '',
-    username: '',
-    sessionToken: '',
-  });
+  const [user, setUser] = useLocalStorage('user', initialAuthState);
 
   const login = (authData) => {
     setUser(authData);
   };
 
-  // const onLogout = () => {};
+  const logout = () => {
+    setUser(initialAuthState);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       <div id="container">
         <Navigation />
 

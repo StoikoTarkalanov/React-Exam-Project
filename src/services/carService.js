@@ -4,7 +4,7 @@ const createPointer = (objectId) => {
   return {
     __type: 'Pointer',
     className: '_User',
-    ownerId: objectId,
+    objectId: objectId,
   };
 };
 
@@ -22,6 +22,20 @@ export const create = async (createData, sessionToken, objectId, username) => {
       'X-Parse-Session-Token': sessionToken,
     },
     body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+export const destroy = async (objectId, sessionToken) => {
+  const response = await fetch(`${serverURL}/classes/Cars/${objectId}`, {
+    method: 'DELETE',
+    headers: {
+      'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
+      'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
+      'X-Parse-Session-Token': sessionToken,
+    },
   });
 
   const result = await response.json();
