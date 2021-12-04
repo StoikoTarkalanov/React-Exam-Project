@@ -50,9 +50,7 @@ const Navigation = () => {
             <h1>AutoStar</h1>
           </Link>
         </article>
-
-        {user.username ? userNavigation : guestNavigation}
-        
+        {user.username ? userNavigation : guestNavigation} 
       </nav>
     </header>
   );

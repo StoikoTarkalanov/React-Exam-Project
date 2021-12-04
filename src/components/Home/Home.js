@@ -16,7 +16,7 @@ const Home = () => {
             </h2>
             <p className="header-landing-content-text">
               We give you the chance to experience the past of the automotive
-              world, a past that lives on in the future in showroom centres like
+              world, a past that lives on in the future in showroom sites like
               AutoStar.
             </p>
             <article className="header-landing-button">
@@ -36,8 +36,6 @@ const Home = () => {
         </article>
         <article className="landing-hero-images">
           <article className="landing-hero-images-row">
-            {/* This images are from posted cars so should come from database */}
-
             <img src={Mercedes} alt="Image..." />
             <h3 className="landing-hero-images-row-title">Mercedes SL</h3>
           </article>

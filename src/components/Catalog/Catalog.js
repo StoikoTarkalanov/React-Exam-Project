@@ -8,13 +8,11 @@ const Catalog = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     (async () => {
       const catalogData = await carService.getAllCars();
       setCars(catalogData.results);
       setLoading(false);
     })();
-
   }, []);
 
   return (
@@ -23,8 +21,7 @@ const Catalog = () => {
       <h1 className="catalog-title">All Cars</h1>
       <section className="cars">
         {cars?.length > 0
-          ?
-            <>
+          ? <>
               {cars.map(x => <CarCard key={x.objectId} car={x} />)}
             </>
           : <p className="no-cars">Don't have cars yet!</p>

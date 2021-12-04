@@ -11,13 +11,11 @@ const UserCatalog = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-
     (async () => {
       const userCatalogData = await carService.getUserCars(user);
       setCars(userCatalogData.results);
       setLoading(false);
     })();
-
   }, []);
 
   return (
@@ -32,7 +30,6 @@ const UserCatalog = () => {
             </>
           : <p className="no-cars">Don't have cars yet!</p>
         }
-
       </section>
     </>
   );

@@ -6,13 +6,11 @@ const CarCard = ({ car }) => {
     <article className="cars-card">
       <h1 className="cars-card-title">{car.title}</h1>
       <article className="cars-card-image">
-        <img src={car.imageUrl} alt="Image..." />
-      </article>
-      <button className="cars-card-button">
-        <Link className="cars-card-button-link" to={`/details/${car.objectId}`}>
-          See Details
+        <Link className="cars-card-image-link" to={`/details/${car.objectId}`}>
+          <img src={car.imageUrl} alt="Image..." />
         </Link>
-      </button>
+      </article>
+      <h2 className="image-info">𝓢𝓮𝓮 𝓒𝓪𝓻 𝓓𝓮𝓽𝓪𝓲𝓵𝓼</h2>
     </article>
   );
 };

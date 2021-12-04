@@ -1,0 +1,69 @@
+@import url('https://use.fontawesome.com/releases/v5.15.4/css/all.css');
+
+.details-cars-card {
+  text-align: center;
+  margin: 40px 100px;
+}
+.details-cars-card-wrap {
+  margin: 40px 100px;
+  padding: 2px 0 80px;
+  background: #23262d;
+  border-top-left-radius: 80px;
+  border-bottom-right-radius: 80px;
+}
+
+.details-cars-card-wrap-title {
+  padding-bottom: 18px;
+  color: white;
+}
+
+.details-cars-card-wrap-image {
+  margin: auto;
+  width: 800px;
+  height: 460px;
+  box-shadow: -2px -1px 20px 1px white;
+  border-top-left-radius: 80px;
+  border-bottom-right-radius: 80px;
+  background: #23262d;
+}
+
+.details-cars-card-wrap-image img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 80px;
+  border-bottom-right-radius: 80px;
+}
+
+.details-cars-card-content {
+  margin: 60px 210px;
+  text-align: justify;
+}
+
+.details-cars-card-buttons-creator {
+  padding: 22px 70px;
+  margin: 36px;
+  text-decoration: none;
+  color: red;
+  font-size: 22px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: -3px -3px 11px -5px black;
+}
+
+.details-cars-card-buttons-likes {
+  margin: 40px;
+}
+
+.details-cars-card-buttons-likes-like {
+  font-size: 22px;
+  padding: 18px 58px;
+  text-decoration: none;
+  color: black;
+  border-radius: 8px;
+  border: none;
+  box-shadow: -3px -3px 11px -5px black;
+}
+
+.details-cars-card-buttons-likes-total {
+  font-size: 22px;
+}

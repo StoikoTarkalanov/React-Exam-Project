@@ -15,12 +15,11 @@ const Logout = () => {
     (async () => {
       await authService.logout(user.sessionToken);
       logout();
-      setLoading(false);
       navigate('/');
+      setLoading(false);
     })();
   }, []);
 
-  // Should use loading
   return <Loading />;
 };
 

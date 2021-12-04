@@ -14,13 +14,11 @@ const Details = () => {
   const { carId } = useParams();
   
   useEffect(() => {
-
     (async () => {
       const detailsData = await carService.getCarById(carId);
       setCar(detailsData);
       setLoading(false);
     })();
-
   }, [carId]);
 
   const deleteHandler = async (e) => {
@@ -36,35 +34,48 @@ const Details = () => {
 
   const creatorButtons = (
     <>
-      <Link className="cars-card-buttons-creator" to={`/edit/${carId}`}>Edit</Link>
-      <a className="cars-card-buttons-creator" href="/#" onClick={deleteHandler}>Delete</a>
+      <Link className="details-cars-card-buttons-creator" to={`/edit/${carId}`}>Edit</Link>
+      <a className="details-cars-card-buttons-creator" href="/#" onClick={deleteHandler}>Delete</a>
     </>
   );
 
-  const userButtons = <a className="cars-card-buttons-likes-like" href="/#">Like</a>;
-  const haveLikes = `This car have ${car.likes?.length} likes`;
+  const isCreator = user?.objectId == car.owner?.objectId;
+  const likeAdjust = car.likes?.length > 1 
+    ? 'likes'
+    : 'like';
+
+  const userButtons = <a className="details-cars-card-buttons-likes-like" href="/#">Like</a>;
+
+  const haveLikes = isCreator 
+    ? `Your car have ${car.likes?.length} ${likeAdjust}`
+    : `This car have ${car.likes?.length} ${likeAdjust}`;
+
+  const manageUserMessage = isCreator 
+    ? 'Your car don\'t have likes yet :(' 
+    : 'This car don\'t have likes yet, like it first :)';
 
   return (
     <>
     {loading ? <Loading /> : '' }
-    <article className="cars-card">
-      <h1 className="cars-card-title">{car.title}</h1>
-      <article className="cars-card-image">
-        <img src={car.imageUrl} alt="Image..." />
+    <article className="details-cars-card">
+    <article className="details-cars-card-wrap">
+        <h1 className="details-cars-card-wrap-title">{car.title}</h1>
+        <article className="details-cars-card-wrap-image">
+          <img src={car.imageUrl} alt="Image..." />
+        </article>
       </article>
-      <p className="cars-card-content">{car.content}</p>
-      <article className="cars-card-buttons">
-        {user?.objectId && 
-        (user?.objectId == car.owner?.objectId
+      <p className="details-cars-card-content">{car.content}</p>
+      <article className="details-cars-card-buttons">
+        {user?.objectId && (isCreator
           ? creatorButtons
           : userButtons
         )}
-        <article className="cars-card-buttons-likes">
-          <span className="cars-card-buttons-likes-total">
+        <article className="details-cars-card-buttons-likes">
+          <span className="details-cars-card-buttons-likes-total">
             {user?.objectId && (car.likes?.length > 0
               ? haveLikes
-              : 'This car don\'t have likes yet, like it first 🙂')
-            }
+              : manageUserMessage
+            )}
           </span>
         </article>
       </article>
