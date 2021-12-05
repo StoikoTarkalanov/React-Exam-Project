@@ -1,12 +1,13 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { isUserGuard } from '../../hoc/isUserGuard';
 import * as carService from '../../services/carService';
 import Loading from '../Loading';
 
 const Create = () => {
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const onCreate = async (e) => {
@@ -65,4 +66,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default isUserGuard(Create);

@@ -1,12 +1,13 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { isGuestGuard } from '../../hoc/isGuestGuard';
 import * as authService from '../../services/authService';
 import Loading from '../Loading';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const onRegisterHandler = async (e) => {
@@ -52,4 +53,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default isGuestGuard(Register);

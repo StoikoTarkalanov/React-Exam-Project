@@ -1,15 +1,15 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import * as carService from '../../services/carService';
 import Loading from '../Loading';
 
 const Details = () => {
   const [loading, setLoading] = useState(true);
   const [car, setCar] = useState({});
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { carId } = useParams();
   

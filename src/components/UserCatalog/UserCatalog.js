@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { isUserGuard } from '../../hoc/isUserGuard';
 import * as carService from '../../services/carService';
 import CarCard from '../Catalog/Card/CarCard';
 import Loading from '../Loading';
 
 const UserCatalog = () => {
   const [loading, setLoading] = useState(true);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
@@ -35,4 +36,4 @@ const UserCatalog = () => {
   );
 };
 
-export default UserCatalog;
+export default isUserGuard(UserCatalog);

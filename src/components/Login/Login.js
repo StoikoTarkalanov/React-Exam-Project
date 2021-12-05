@@ -1,12 +1,13 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { isGuestGuard } from '../../hoc/isGuestGuard';
 import * as authService from '../../services/authService';
 import Loading from '../Loading';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const onLoginHandler = async (e) => {
@@ -41,11 +42,7 @@ const Login = () => {
       {loading ? <Loading /> : ''}
       <article className="form-validate">
         <h1 className="form-validate-title">Login</h1>
-        <form
-          className="form-validate-content"
-          method="POST"
-          onSubmit={onLoginHandler}
-        >
+        <form className="form-validate-content" method="POST" onSubmit={onLoginHandler}>
           <input type="email" name="username" placeholder="Email" />
           <input type="password" name="password" placeholder="Password" />
           <input type="submit" value="Login" />
@@ -55,4 +52,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default isGuestGuard(Login);

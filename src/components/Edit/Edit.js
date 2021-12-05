@@ -1,3 +1,5 @@
+import { isUserGuard } from '../../hoc/isUserGuard';
+
 const Edit = () => {
   return (
       <article className="form-car">
@@ -12,4 +14,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default isUserGuard(Edit);

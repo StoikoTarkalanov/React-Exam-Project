@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 
 const Navigation = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   let guestNavigation = (
     <ul className="nav-menu">
