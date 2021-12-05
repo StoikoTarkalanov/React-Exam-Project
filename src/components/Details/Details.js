@@ -10,9 +10,9 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
   const [car, setCar] = useState({});
   const { user } = useAuth();
-  const navigate = useNavigate();
   const { carId } = useParams();
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     (async () => {
       const detailsData = await carService.getCarById(carId);
@@ -24,12 +24,15 @@ const Details = () => {
   const deleteHandler = async (e) => {
     e.preventDefault();
 
-    setLoading(true);    
-    // const destroyData =    Should ask if you want to delete ? 
-    await carService.destroy(carId, user.sessionToken);
-    setLoading(false);
-    
-    navigate('/user-cars');
+    let confirmed = window.confirm('Are you sure you want to delete this car article?');
+    if (confirmed) {
+      setLoading(true);    
+      await carService.destroy(carId, user.sessionToken);
+      setLoading(false);    
+      navigate('/user-cars'); 
+    } else {
+      return
+    }
   }
 
   const creatorButtons = (

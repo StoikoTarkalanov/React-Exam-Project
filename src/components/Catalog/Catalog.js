@@ -14,7 +14,7 @@ const Catalog = () => {
       setLoading(false);
     })();
   }, []);
-
+   
   return (
     <>
       {loading ? <Loading /> : '' }

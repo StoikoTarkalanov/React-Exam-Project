@@ -22,9 +22,10 @@ export const getAllCars = async () => {
   return result;
 };
 
-export const getUserCars = async ({sessionToken, objectId}) => {
+export const getUserCars = async ({ objectId }) => {
   const owner = createPointer(objectId);
-  const query = JSON.stringify({owner});
+  const query = JSON.stringify({ owner });
+
   const response = await fetch(`${serverURL}/classes/Cars?where=${encodeURIComponent(query)}`, {
     method: 'GET',
     headers: {
@@ -59,6 +60,22 @@ export const create = async (createData, sessionToken, objectId, username) => {
 
   const response = await fetch(`${serverURL}/classes/Cars`, {
     method: 'POST',
+    headers: {
+      'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
+      'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',
+      'Content-Type': 'application/json',
+      'X-Parse-Session-Token': sessionToken,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  return result;
+};
+
+export const edit = async (objectId, sessionToken, data) => {
+  const response = await fetch(`${serverURL}/classes/Cars/${objectId}`, {
+    method: 'PUT',
     headers: {
       'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
       'X-Parse-REST-API-Key': 'JoszzkAhfbRqQKCiNGreC1evfFf4JF5S9tGjazvE',

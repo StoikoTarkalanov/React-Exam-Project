@@ -13,6 +13,7 @@ import Create from './components/Create';
 import Edit from './components/Edit';
 import About from './components/About';
 import Details from './components/Details';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -21,13 +22,14 @@ function App() {
         <Navigation />
         <main id="site-content">
           <Routes>
+            <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="/all-cars" element={<Catalog />} />
             <Route path="/user-cars" element={<UserCatalog />} />
             <Route path="/about" element={<About />} />
             <Route path="/create" element={<Create />} />
             <Route path="/details/:carId" element={<Details />} />
-            <Route path="/Edit" element={<Edit />} />
+            <Route path="/edit/:carId" element={<Edit />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
