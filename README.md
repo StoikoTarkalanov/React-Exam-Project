@@ -1,3 +1,50 @@
+# Auto Star Project
+
+# English
+## Project Example
+
+The "Auto Star" project is a site aimed at vintage car enthusiasts. Anyone can log into the site and browse the varieties of publications, as well as create their own publication of the car they own.
+
+## Register
+
+Anyone can register without specific requirements, all you need is a email and password. 
+
+## Login
+
+When the user wants to log in to his account, he must indicate the email used during registration with the respective password.
+
+## Guest Users
+
+Users without an account are only able to view other people's car posts.
+
+## Logged Users
+ <!-- Each logged user can like other people posts and ect.  -->
+Each user logged in to their account has the opportunity to create posts, by specifying 'Name', 'Post photo link / like cover type /' and 'Post content'. If necessary, the user has the opportunity to edit all the entered information -> 'Name', 'Link', 'Content', as well as to delete the relevant post.
+
+
+# Български
+## Резюме
+
+Проектът "Auto Star" е сайт насочен към атомобилни ентусиасти на ретро автомобилна техника. Всеки може да влезе в сайта и да разгледа разновидностите от публикации, както и да създаде своя публикация на автомобила който притежава.
+
+## Регистрация
+
+Всеки може да се регистрира без спечифияни изисквания, единствено са нужни имейл и парола.
+
+## Вход
+
+Потребителят когато поиска да влезе в профила си трябва да посочи имейлът използван при регистрация заедно със съответната парола.
+
+## Потребител без профил
+
+Потребителите без профил имат възможност само да разглеждат чуждите автомобилни публикации.
+
+## Потребител с профил
+
+Всеки потребител влязъл в своя профил има възможност да създава публикации, като трябва да посочи 'Име', 'Линк за снимка на автомобила/тип корица/' и 'Съдържание на публикацията'. При необходимост потребителят има възможност да редактира цялата въведена информация -> 'Име', 'Линк', 'Съдържание', като и да изтрие съответната публикация.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
