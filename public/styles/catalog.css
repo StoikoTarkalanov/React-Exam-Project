@@ -1,6 +1,7 @@
 .cars {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .catalog-title {
@@ -10,8 +11,8 @@
 
 .cars-card {
   text-align: center;
-  margin: 40px 200px;
-  padding-bottom: 75px;
+  margin: 61px 34px;
+  padding: 0 67px 75px;
   border-top-left-radius: 80px;
   border-bottom-right-radius: 80px;
   background: #23262d;
@@ -24,8 +25,8 @@
 
 .cars-card-image {
   margin: auto;
-  width: 800px;
-  height: 460px;
+  width: 500px;
+  height: 360px;
   box-shadow: -2px -1px 20px 1px white;
   border-top-left-radius: 80px;
   border-bottom-right-radius: 80px;
