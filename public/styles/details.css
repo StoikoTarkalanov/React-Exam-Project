@@ -78,3 +78,14 @@
   color: gray;
   background-color: gray;
 }
+
+.details-cars-card-wrap-created-by-content {
+  display: flex;
+}
+
+.details-cars-card-wrap-created-by-content {
+  color: ghostwhite;
+  justify-content: center;
+  padding-top: 20px;
+  margin-bottom: -40px;
+}

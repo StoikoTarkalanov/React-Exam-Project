@@ -21,7 +21,7 @@ const Details = () => {
       setCar(detailsData);
       setLoading(false);
     })();
-  }, [carId]);
+  }, [carId, car.likes]);
 
   const deleteHandler = async (e) => {
     e.preventDefault();
@@ -39,28 +39,22 @@ const Details = () => {
   }
 
   const likeClicked = async () => {
-    // if (pet.likes.includes(user._id)) {
-    //     console.log('User already liked');
-    //     return;
-    // }
+    if (car.likes.includes(user.objectId)) {
+      return;
+    }
 
     let likes = [...car.likes, user.objectId];
     const { title, imageUrl, content } = car;
 
-    console.log(likes);
-    // setLoading(true);
-    await carService.edit(carId, user.sessionToken, 
+    await carService.edit(carId, user.sessionToken,
       {
-        title, 
-        imageUrl, 
+        title,
+        imageUrl,
         content,
         likes,
       }
     );
-    // setLoading(false);
-
-    navigate(`/details/${carId}`);
-};
+  };
 
   const creatorButtons = (
     <>
@@ -74,7 +68,10 @@ const Details = () => {
     ? 'likes'
     : 'like';
 
-  const userButtons = <button className="details-cars-card-buttons-likes-like" onClick={likeClicked}>Like</button>;
+  // const userButtons = <button className="details-cars-card-buttons-likes-like" onClick={likeClicked}>Like</button>;
+  const isLiked = !car.likes?.includes(user.objectId)
+    ? <button className="details-cars-card-buttons-likes-like" onClick={likeClicked}>Like</button>
+    : '';
 
   const haveLikes = isCreator 
     ? `Your car have ${car.likes?.length} ${likeAdjust}`
@@ -94,13 +91,16 @@ const Details = () => {
         <article className="details-cars-card-wrap-image">
           <img src={car.imageUrl} alt="Image..." />
         </article>
+        <article className="details-cars-card-wrap-created-by">
+          <h3 className="details-cars-card-wrap-created-by-content">Posted By: {car.createdBy}</h3>
+        </article>
       </article>
       <p className="details-cars-card-content">{car.content}</p>
       <hr className="line-separator" />
       <article className="details-cars-card-buttons">
         {user?.objectId && (isCreator
           ? creatorButtons
-          : userButtons
+          : isLiked
         )}
         <article className="details-cars-card-buttons-likes">
           <span className="details-cars-card-buttons-likes-total">

@@ -57,6 +57,7 @@ export const create = async (createData, sessionToken, objectId, username) => {
   const data = Object.assign({}, createData);
   data.owner = createPointer(objectId);
   data.createdBy = username;
+  data.likes = [];
 
   const response = await fetch(`${serverURL}/classes/Cars`, {
     method: 'POST',
