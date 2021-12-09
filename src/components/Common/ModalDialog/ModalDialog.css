@@ -1,0 +1,39 @@
+.modal-container {
+  background: white;
+  margin: 0;
+  position: fixed;
+  top: 28%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  padding: 44px 70px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.modal-container-title {
+  margin-bottom: 25px;
+}
+
+.buttons-container {
+  margin-top: 25px;
+}
+
+.modal-container-button {
+  padding: 8px 26px;
+  font-size: 16px;
+  background: white;
+  border: none;
+  box-shadow: -3px -3px 11px -5px black;
+  cursor: pointer;
+}
+
+.cancel {
+  margin-right: 52px;
+  color: black;
+}
+
+.delete {
+  color: red;
+}

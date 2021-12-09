@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navigation = () => {
   return (
     <footer className='footer'>
@@ -6,7 +8,7 @@ const Navigation = () => {
           &copy; 2021 All Rights Reserved.
         </p>
         <p className='footer-information-link'>
-          <a href='#/'>AutoStar</a>
+          <Link to='/'>AutoStar</Link>
         </p>
       </article>
     </footer>

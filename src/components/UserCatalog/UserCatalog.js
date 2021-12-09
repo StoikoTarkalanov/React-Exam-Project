@@ -29,7 +29,7 @@ const UserCatalog = () => {
             <>
               {cars.map(x => <CarCard key={x.objectId} car={x} />)}
             </>
-          : <p className="no-cars">Don't have cars yet!</p>
+          : <p className="no-cars">You don't have cars yet!</p>
         }
       </section>
     </>

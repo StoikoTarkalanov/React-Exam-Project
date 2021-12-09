@@ -32,7 +32,7 @@ export const register = async (username, password) => {
 };
 
 export const logout = async (sessionToken) => {
-  const response = await fetch(`${serverURL}/logout`, {
+  await fetch(`${serverURL}/logout`, {
     method: 'POST',
     headers: {
       'X-Parse-Application-Id': 'd5M3jeFeVm9hVWtZUSE5zfv5vjW5LTGy7mYetitg',
@@ -43,7 +43,4 @@ export const logout = async (sessionToken) => {
     },
     body: {},
   });
-
-  const result = await response.json();
-  return result;
 };

@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import * as carService from '../../services/carService';
+import ModalDialog from '../Common/ModalDialog';
 import Loading from '../Loading';
 
 const Details = () => {
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
   const [car, setCar] = useState({});
   const { user } = useAuth();
   const { carId } = useParams();
@@ -24,21 +26,22 @@ const Details = () => {
   const deleteHandler = async (e) => {
     e.preventDefault();
 
-    let confirmed = window.confirm('Are you sure you want to delete this car article?');
-    if (confirmed) {
-      setLoading(true);    
-      await carService.destroy(carId, user.sessionToken);
-      setLoading(false);    
-      navigate('/user-cars'); 
-    } else {
-      return
-    }
+    setModal(false);
+    setLoading(true);    
+    await carService.destroy(carId, user.sessionToken);
+    setLoading(false);    
+    navigate('/user-cars'); 
+  }
+
+  const deleteClickHandler = (e) => {
+    e.preventDefault();
+    setModal(true);
   }
 
   const creatorButtons = (
     <>
       <Link className="details-cars-card-buttons-creator" to={`/edit/${carId}`}>Edit</Link>
-      <a className="details-cars-card-buttons-creator" href="/#" onClick={deleteHandler}>Delete</a>
+      <a className="details-cars-card-buttons-creator" href="/#" onClick={deleteClickHandler}>Delete</a>
     </>
   );
 
@@ -47,7 +50,7 @@ const Details = () => {
     ? 'likes'
     : 'like';
 
-  const userButtons = <a className="details-cars-card-buttons-likes-like" href="/#">Like</a>;
+  const userButtons = <button className="details-cars-card-buttons-likes-like">Like</button>;
 
   const haveLikes = isCreator 
     ? `Your car have ${car.likes?.length} ${likeAdjust}`
@@ -59,6 +62,7 @@ const Details = () => {
 
   return (
     <>
+    <ModalDialog show={modal} onClose={() => setModal(false)} onSave={deleteHandler} />
     {loading ? <Loading /> : '' }
     <article className="details-cars-card">
     <article className="details-cars-card-wrap">
