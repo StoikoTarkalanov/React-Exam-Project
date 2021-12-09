@@ -38,6 +38,30 @@ const Details = () => {
     setModal(true);
   }
 
+  const likeClicked = async () => {
+    // if (pet.likes.includes(user._id)) {
+    //     console.log('User already liked');
+    //     return;
+    // }
+
+    let likes = [...car.likes, user.objectId];
+    const { title, imageUrl, content } = car;
+
+    console.log(likes);
+    // setLoading(true);
+    await carService.edit(carId, user.sessionToken, 
+      {
+        title, 
+        imageUrl, 
+        content,
+        likes,
+      }
+    );
+    // setLoading(false);
+
+    navigate(`/details/${carId}`);
+};
+
   const creatorButtons = (
     <>
       <Link className="details-cars-card-buttons-creator" to={`/edit/${carId}`}>Edit</Link>
@@ -50,7 +74,7 @@ const Details = () => {
     ? 'likes'
     : 'like';
 
-  const userButtons = <button className="details-cars-card-buttons-likes-like">Like</button>;
+  const userButtons = <button className="details-cars-card-buttons-likes-like" onClick={likeClicked}>Like</button>;
 
   const haveLikes = isCreator 
     ? `Your car have ${car.likes?.length} ${likeAdjust}`
@@ -72,6 +96,7 @@ const Details = () => {
         </article>
       </article>
       <p className="details-cars-card-content">{car.content}</p>
+      <hr className="line-separator" />
       <article className="details-cars-card-buttons">
         {user?.objectId && (isCreator
           ? creatorButtons

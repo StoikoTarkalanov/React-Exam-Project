@@ -34,7 +34,7 @@ const Edit = () => {
     await carService.edit(carId, user.sessionToken, 
       {
         title, 
-        imageUrl, 
+        imageUrl,
         content,
       }
     );

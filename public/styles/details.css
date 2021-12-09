@@ -55,15 +55,26 @@
 }
 
 .details-cars-card-buttons-likes-like {
-  font-size: 22px;
-  padding: 18px 58px;
+  padding: 22px 70px;
   text-decoration: none;
+  font-size: 22px;
   color: black;
+  background: white;
   border-radius: 8px;
   border: none;
   box-shadow: -3px -3px 11px -5px black;
+  cursor: pointer;
 }
 
 .details-cars-card-buttons-likes-total {
   font-size: 22px;
+}
+
+.line-separator {
+  margin-bottom: 66px;
+  width: 60%;
+  height: 2px;
+  border-width: 0;
+  color: gray;
+  background-color: gray;
 }
