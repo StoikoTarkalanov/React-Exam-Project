@@ -1,6 +1,6 @@
 const serverURL = 'https://parseapi.back4app.com';
 
-export const login = async (username, password) => {
+export const login = async (username, password, signal) => {
   const response = await fetch(`${serverURL}/login`, {
     method: 'POST',
     headers: {
@@ -9,13 +9,14 @@ export const login = async (username, password) => {
       'X-Parse-Revocable-Session': 1,
     },
     body: JSON.stringify({ username, password }),
+    signal,
   });
 
   const result = await response.json();
   return result;
 };
 
-export const register = async (username, password) => {
+export const register = async (username, password, signal) => {
   const response = await fetch(`${serverURL}/users`, {
     method: 'POST',
     headers: {
@@ -25,6 +26,7 @@ export const register = async (username, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ username, password }),
+    signal,
   });
 
   const result = await response.json();

@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-escape */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { isGuestGuard } from '../../hoc/isGuestGuard';
@@ -9,19 +10,27 @@ import Loading from '../Loading';
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({email: undefined, password: undefined, database: undefined});
-  const mountedRef = useRef(true);
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const controller = useMemo(() => {
+    const controller = new AbortController();
+    return controller;
+  }, []);
+
   useEffect(() => {
     return () => {
-      mountedRef.current = false;
+      controller.abort();
    };
-  }, []);
+  }, [controller]);
 
   const onLoginHandler = async (e) => {
     e.preventDefault();
     setErrors(state => ({...state, database: undefined}));
+
+    if (errors.email !== undefined || errors.password !== undefined) {
+      // return;
+    }
 
     let formData = new FormData(e.currentTarget);
 
@@ -30,7 +39,7 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const authData = await authService.login(name, password);
+      const authData = await authService.login(name, password, controller.signal);
       const { objectId, username, sessionToken } = authData;
 
       const { code, error } = authData;
@@ -43,9 +52,8 @@ const Login = () => {
 
       navigate('/');
     } catch (error) {
-      if (!mountedRef.current) return null;
       setLoading(false);
-      let message = error === 'username/email is required.' ? 'email is required' : error;
+      let message = error === 'username/email is required.' ? 'Email is required' : error;
       setErrors(state => ({...state, database: message}));
     }
   };
@@ -65,6 +73,8 @@ const Login = () => {
     let password = e.target.value;
     if (password.length < 6) {
       setErrors(state => ({...state, password: 'Your password should be at least 6 characters long!'}));
+    } else if (password.length > 20) {
+      setErrors(state => ({...state, password: 'Your password should be less than 20 characters!'}));
     } else {
       setErrors(state => ({...state, password: undefined}));
     }
@@ -77,18 +87,16 @@ const Login = () => {
         <h1 className="form-validate-title">Login</h1>
         <form className="form-validate-content" method="POST" onSubmit={onLoginHandler}>
           <input type="email" name="username" placeholder="Email" onChange={emailHandler} />
-          <span className="form-error-message">
+          <h5 className="form-error-message">
             {errors.email !== undefined ? errors.email : ''}
-          </span>
+          </h5>
           <input type="password" name="password" placeholder="Password" onChange={passwordHandler} />
-          <span>
-            <span className="form-error-message">
+            <h5 className="form-error-message">
               {errors.password !== undefined ? errors.password : '' }
-            </span>
-            <span className="form-error-message">
+            </h5>
+            <h5 className="form-error-message">
               {errors.database !== undefined ? errors.database : '' }
-            </span>
-          </span>
+            </h5>
           <input type="submit" value="Login" />
         </form>
       </article>

@@ -11,12 +11,18 @@ const Create = () => {
     title: undefined,
     image: undefined,
     content: undefined,
+    database: undefined,
   });
   const { user } = useAuth();
   const navigate = useNavigate();
 
   const onCreate = async (e) => {
     e.preventDefault();
+    setErrors(state => ({...state, database: undefined}));
+    
+    if (errors.title !== undefined || errors.image !== undefined || errors.content !== undefined) {
+      return;
+    }
 
     let formData = new FormData(e.currentTarget);
 
@@ -25,6 +31,7 @@ const Create = () => {
     let content = formData.get('content');
 
     setLoading(true);
+    try {
       const createData = await carService.create(
         {
           title,
@@ -35,11 +42,20 @@ const Create = () => {
         user.objectId,
         user.username
       );
+
+      const { code, error } = createData;
+      if (code) {
+        throw error;
+      }
       setLoading(false);
 
       navigate(`/details/${createData.objectId}`);
+    } catch (error) {
+      setLoading(false);
+      setErrors(state => ({...state, database: error}));        
+    }
   };
-
+  
   const titleHandler = (e) => {
     let title = e.target.value;
     if (title.length < 3) {
@@ -78,13 +94,13 @@ const Create = () => {
         <h1 className="form-car-title">Create</h1>
         <form className="form-car-content" onSubmit={onCreate} method="POST">
           <input type="text" id="title" name="title" placeholder="Car Title" onChange={titleHandler} />
-          <span className="form-error-message">
+          <h5 className="form-error-message">
             {errors.title !== undefined ? errors.title : ''}
-          </span>
+          </h5>
           <input type="text" id="url" name="url" placeholder="Image URL" onChange={imageHandler} />
-          <span className="form-error-message">
+          <h5 className="form-error-message">
             {errors.image !== undefined ? errors.image : ''}
-          </span>
+          </h5>
           <textarea
             id="content"
             name="content"
@@ -93,9 +109,12 @@ const Create = () => {
             placeholder="Car Information"
             onChange={contentHandler} 
           /> <br /> <br />
-          <span className="form-error-message">
+          <h5 className="form-error-message">
             {errors.content !== undefined ? errors.content : ''}
-          </span>
+          </h5>
+          <h5 className="form-error-message">
+            {errors.database !== undefined ? errors.database : '' }
+          </h5>
           <input type="submit" value="Create" />
         </form>
       </article>

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import * as carService from '../../services/carService';
 import CarCard from './Card/CarCard';
 import Loading from '../Loading';
+import usePaginate from '../../hooks/usePaginate';
+import Paginate from '../Common/Paginate';
 
 const Catalog = () => {
   const [cars, setCars] = useState([]);
@@ -14,6 +16,8 @@ const Catalog = () => {
       setLoading(false);
     })();
   }, []);
+
+  const [currentCars, postsPerPage, paginate] = usePaginate(cars);
    
   return (
     <>
@@ -22,11 +26,19 @@ const Catalog = () => {
       <section className="cars">
         {cars?.length > 0
           ? <>
-              {cars.map(x => <CarCard key={x.objectId} car={x} />)}
+              {currentCars.map(x => <CarCard key={x.objectId} car={x} />)}
             </>
           : <p className="no-cars">Don't have cars yet!</p>
         }
       </section>
+      {cars.length > 0
+        ? <Paginate
+            postsPerPage={postsPerPage}
+            totalPosts={cars.length}
+            paginate={paginate}
+          />
+        : ''
+      }
     </>
   );
 };

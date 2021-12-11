@@ -2,14 +2,16 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { isUserGuard } from '../../hoc/isUserGuard';
+import usePaginate from '../../hooks/usePaginate';
 import * as carService from '../../services/carService';
 import CarCard from '../Catalog/Card/CarCard';
+import Paginate from '../Common/Paginate';
 import Loading from '../Loading';
 
 const UserCatalog = () => {
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
   const [cars, setCars] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
     (async () => {
@@ -19,19 +21,28 @@ const UserCatalog = () => {
     })();
   }, []);
 
+  const [currentCars, postsPerPage, paginate] = usePaginate(cars);
+
   return (
     <>
-    {loading ? <Loading /> : '' }
+      {loading ? <Loading /> : '' }
       <h1 className="catalog-title">My Cars</h1>
       <section className="cars">
         { cars.length > 0
-          ?
-            <>
-              {cars.map(x => <CarCard key={x.objectId} car={x} />)}
+          ? <>
+              {currentCars.map(x => <CarCard key={x.objectId} car={x} />)}
             </>
           : <p className="no-cars">You don't have cars yet!</p>
         }
       </section>
+      {cars.length > 0
+        ? <Paginate
+            postsPerPage={postsPerPage}
+            totalPosts={cars.length}
+            paginate={paginate}
+          />
+        : ''
+      }
     </>
   );
 };

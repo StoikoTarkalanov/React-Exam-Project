@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { isGuestGuard } from '../../hoc/isGuestGuard';
@@ -17,9 +17,25 @@ const Register = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const controller = useMemo(() => {
+    const controller = new AbortController();
+    return controller;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      controller.abort();
+   };
+  }, [controller]);
+
+
   const onRegisterHandler = async (e) => {
     e.preventDefault();
     setErrors(state => ({...state, database: undefined}));
+    
+    if (errors.email !== undefined || errors.password !== undefined || errors.rePassword !== undefined) {
+      return;
+    }
 
     let formData = new FormData(e.currentTarget);
 
@@ -36,7 +52,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const authData = await authService.register(username, password);
+      const authData = await authService.register(username, password, controller.signal);
       const { objectId, sessionToken } = authData;
       
       const { code, error } = authData;
@@ -44,13 +60,13 @@ const Register = () => {
         throw error;
       }
       
-      login({ objectId, username, sessionToken });
       setLoading(false);
+      login({ objectId, username, sessionToken });
 
       navigate('/');
     } catch (error) {
       setLoading(false);
-      let message = error === 'bad or missing username' ? 'email is required' : error;
+      let message = error === 'bad or missing username' ? 'Email is required' : error;
       setErrors(state => ({...state, database: message }));
     }
   };
@@ -70,6 +86,8 @@ const Register = () => {
     let password = e.target.value;
     if (password.length < 6) {
       setErrors(state => ({...state, password: 'Your password should be at least 6 characters long!'}));
+    } else if (password.length > 20) {
+      setErrors(state => ({...state, password: 'Your password should be less than 20 characters!'}));
     } else {
       setErrors(state => ({...state, password: undefined}));
     }
@@ -79,6 +97,8 @@ const Register = () => {
     let rePassword = e.target.value;
     if (rePassword.length < 6) {
       setErrors(state => ({...state, rePassword: 'Your password should be at least 6 characters long!'}));
+    } else if (rePassword.length > 20) {
+      setErrors(state => ({...state, rePassword: 'Your password should be less than 20 characters!'}));
     } else {
       setErrors(state => ({...state, rePassword: undefined}));
     }
@@ -91,22 +111,20 @@ const Register = () => {
         <h1 className="form-validate-title">Register</h1>
         <form className="form-validate-content" method="POST" onSubmit={onRegisterHandler}>
           <input type="email" name="username" placeholder="Email" onChange={emailHandler} />
-          <span className="form-error-message">
+          <h5 className="form-error-message">
             {errors.email !== undefined ? errors.email : ''}
-          </span>
+          </h5>
           <input type="password" name="password" placeholder="Password" onChange={passwordHandler} />
-          <span className="form-error-message">
+          <h5 className="form-error-message">
             {errors.password !== undefined ? errors.password : '' }
-          </span>
-          <input type="password" name="repeatPassword" placeholder="Repeat Password" onChange={rePasswordHandler} />
-          <span>
-            <span className="form-error-message">
-              {errors.rePassword !== undefined ? errors.rePassword : '' }
-            </span>
-            <span className="form-error-message">
-              {errors.database !== undefined ? errors.database : '' }
-            </span>
-          </span>
+          </h5>
+          <input type="password" name="repeatPassword" placeholder="Confirm Password" onChange={rePasswordHandler} />
+          <h5 className="form-error-message">
+            {errors.rePassword !== undefined ? errors.rePassword : '' }
+          </h5>
+          <h5 className="form-error-message">
+            {errors.database !== undefined ? errors.database : '' }
+          </h5>
           <input type="submit" value="Register" />
         </form>
       </article>

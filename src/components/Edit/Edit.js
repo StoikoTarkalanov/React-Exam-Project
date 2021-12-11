@@ -12,6 +12,7 @@ const Edit = () => {
     title: undefined,
     image: undefined,
     content: undefined,
+    database: undefined,
   });
   const { user } = useAuth();
   const { carId } = useParams();
@@ -27,20 +28,36 @@ const Edit = () => {
 
   const editHandler = async (e) => {
     e.preventDefault();
+    setErrors(state => ({...state, database: undefined}));
+    
+    if (errors.title !== undefined || errors.image !== undefined || errors.content !== undefined) {
+      return;
+    }
 
     const { title, imageUrl, content } = Object.fromEntries(new FormData(e.currentTarget));
 
     setLoading(true);
-    await carService.edit(carId, user.sessionToken, 
-      {
-        title, 
-        imageUrl,
-        content,
-      }
-    );
 
-    setLoading(false);
-    navigate(`/details/${carId}`);
+    try {
+      const editData = await carService.edit(carId, user.sessionToken, 
+        {
+          title, 
+          imageUrl,
+          content,
+        }
+      );
+
+      const { code, error } = editData;
+      if (code) {
+        throw error;
+      }
+      setLoading(false);
+
+      navigate(`/details/${carId}`);    
+    } catch (error) {
+      setLoading(false);
+      setErrors(state => ({...state, database: error}));
+    }
   };
 
   const titleHandler = (e) => {
@@ -90,8 +107,13 @@ const Edit = () => {
           </span>
           <textarea id="content" name="content" rows="8" cols="70" defaultValue={carData?.content} onChange={contentHandler} />
           <br /> <br />
-          <span className="form-error-message">
-            {errors.content !== undefined ? errors.content : ''}
+          <span>
+            <span className="form-error-message">
+              {errors.content !== undefined ? errors.content : ''}
+            </span>
+            <span className="form-error-message">
+                {errors.database !== undefined ? errors.database : '' }
+            </span>
           </span>
           <input type="submit" value="Edit" />
         </form>
